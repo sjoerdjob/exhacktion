@@ -13,7 +13,8 @@ import sys
 class FileNotFoundError(Exception):
     class __metaclass__(type):
         def __instancecheck__(cls, inst):
-            return isinstance(inst, IOError) and inst.errno == errno.ENOENT
+            return isinstance(inst, (IOError, OSError)) \
+                and inst.errno == errno.ENOENT
 
         def __subclasscheck__(cls, classinfo):
             # This hook is called during the exception handling. Unfortunately,
