@@ -18,7 +18,7 @@ except EnvironmentError as e:
         raise
 ```
 
-Would it not just be way nicer to say
+Would it not just be way nicer to say:
 
 ```
 try:
@@ -29,3 +29,8 @@ except FileNotFoundError:
 
 Yes it would! And Exhaction is what'll make that happen for you. Of course,
 Python 3 already has that built-in, just for you. But it makes a nice use case.
+
+Furthermore, not only the standard library is plagued by this, but also the
+sqlite3 module, the psycopg2 module, and a lot of others just give the same
+exception type for many different error behaviours, forcing you to inspect
+the exception all over the place.
