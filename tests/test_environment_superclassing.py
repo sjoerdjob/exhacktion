@@ -2,7 +2,7 @@ import errno
 import os
 import unittest
 
-from exhacktion.environmenterror import FileNotFoundError
+from exhacktion.environmenterror import FileNotFoundError, NotADirectoryError
 
 
 class TestEnvironmentSuperClassing(unittest.TestCase):
@@ -32,3 +32,11 @@ class TestEnvironmentSuperClassing(unittest.TestCase):
             pass
         except OSError as e:
             assert e.errno == errno.ENOTDIR
+
+    def test_catching_enotdir_from_listdir(self):
+        try:
+            os.listdir(__file__)
+        except NotADirectoryError:
+            pass
+        except Exception as e:
+            raise AssertionError("Could not create proper exception:" + str(e))
