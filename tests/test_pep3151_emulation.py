@@ -2,10 +2,10 @@ import errno
 import os
 import unittest
 
-from exhacktion.environmenterror import FileNotFoundError, NotADirectoryError
+from exhacktion.pep3151 import FileNotFoundError, NotADirectoryError
 
 
-class TestEnvironmentSuperClassing(unittest.TestCase):
+class TestPEP3151LikeSuperClassing(unittest.TestCase):
     def test_catching_enoent_from_open(self):
         try:
             open("/I/sure/hope/this/does/not.exist")
