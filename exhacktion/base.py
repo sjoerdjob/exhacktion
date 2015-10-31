@@ -2,6 +2,7 @@
 Defines the base `instance_checking_exception` creator.
 """
 
+import re
 import sys
 
 
@@ -29,3 +30,12 @@ def instance_checking_exception(instance_checker):
     TemporaryClass.__name__ = instance_checker.__name__
     TemporaryClass.__doc__ = instance_checker.__doc__
     return TemporaryClass
+
+
+def message_checking_exception(regex, classname=None):
+    @instance_checking_exception
+    def check_message(inst):
+        return re.search(regex, inst.message)
+    if classname is not None:
+        check_message.__class__ = classname
+    return check_message
