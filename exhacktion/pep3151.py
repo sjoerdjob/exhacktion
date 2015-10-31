@@ -19,6 +19,13 @@ def BlockingIOError(inst):
 
 
 @instance_checking_exception
+def BrokenPipeError(inst):
+    """Broken pipe."""
+    errnos = {errno.EPIPE, errno.ESHUTDOWN}
+    return hasattr(inst, 'errno') and inst.errno in errnos
+
+
+@instance_checking_exception
 def ChildProcessError(inst):
     """Child process error."""
     return hasattr(inst, 'errno') and inst.errno == errno.ECHILD
@@ -30,6 +37,24 @@ def ConnectionError(inst):
     errnos = {errno.EPIPE, errno.ESHUTDOWN, errno.ECONNABORTED,
               errno.ECONNREFUSED, errno.ECONNRESET}
     return hasattr(inst, 'errno') and inst.errno in errnos
+
+
+@instance_checking_exception
+def ConnectionAbortedError(inst):
+    """Connection aborted."""
+    return hasattr(inst, 'errno') and inst.errno == errno.ECONNABORTED
+
+
+@instance_checking_exception
+def ConnectionRefusedError(inst):
+    """Connection refused."""
+    return hasattr(inst, 'errno') and inst.errno == errno.ECONNREFUSED
+
+
+@instance_checking_exception
+def ConnectionResetError(inst):
+    """Connection reset."""
+    return hasattr(inst, 'errno') and inst.errno == errno.ECONNRESET
 
 
 @instance_checking_exception
