@@ -22,7 +22,7 @@ class TestEnvironmentSuperClassing(unittest.TestCase):
         except Exception as e:
             raise AssertionError("Could not create proper exception:" + str(e))
 
-    def test_catching_non_enoent(self):
+    def test_not_catching_non_enoent(self):
         try:
             os.listdir(__file__)
         except FileNotFoundError:
